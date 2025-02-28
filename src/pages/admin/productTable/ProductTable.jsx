@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer,toast } from 'react-toastify';
 import { fetchProducts, removeProduct } from "../../../features/products/productActions";
-import AtomLoading from "../../../compoents/atoms/AtomLoading/atomLoading";
+import AtomLoading from "../../../compoents/atoms/AtomLoading/AtomLoading";
 
 const ProductTable = () => {
 	const { products, loading, error, message } = useSelector((state) => state.products);

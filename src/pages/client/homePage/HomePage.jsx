@@ -1,4 +1,3 @@
-import SubHeader from '../../../compoents/organisms/organismHeader/subHeader/SubHeader';
 import './HomePage.scss';
 import HomeSlider from './homeSlider/HomeSlider';
 // import React from 'react'
@@ -11,8 +10,8 @@ const HomePage = () => {
 					<div className="home-page-inner"></div>
 					{/* Menu multi - Banner */}
 					<div className="subheader container">
-						<SubHeader />
-						<div className="flex flex-col w-full md:w-3/4 bg-gray-100 p-1 rounded shadow-md">
+						{/* <SubHeader md:w-3/4 /> */}
+						<div className="flex flex-col w-full md:w-100 bg-gray-100 p-1 rounded shadow-md">
 							<HomeSlider />
 						</div>
 					</div>

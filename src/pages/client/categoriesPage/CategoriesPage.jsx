@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 
-import { fetchProducts, fetchProductById } from '../../../features/products/productActions';
-import AtomLoading from '../../../compoents/atoms/AtomLoading/atomLoading';
-import { formatPrice } from '../../../utils/money';
+import { fetchProducts } from '../../../features/products/productActions';
+import AtomLoading from '../../../compoents/atoms/AtomLoading/AtomLoading';
 import { getAllProducts  } from '../../../services/productServices';
+import MoleculeProductCard from '../../../compoents/molecules/moleculeProductCard/moleculeProductCard';
 
 // import React from 'react'
 
@@ -34,6 +34,8 @@ function CategoriesPage() {
 	const { products, totalProducts, loading } = useSelector(
 		state => state.products
 	); // error, statusCode, message
+
+	console.log('CategoriesPage products: ', products);
 
 	useEffect(() => {
 		(async () => {
@@ -144,18 +146,20 @@ function CategoriesPage() {
 	// console.log("Số lượng bản ghi mỗi trang:", event.target.value);
 	};
 
-	const [search, setSearch] = useState('');
+	// const [search, setSearch] = useState('');
 
-	const handleSearch = () => {
-		// onSearch(search);
-		setParams(() => ({ _q: search,}));
-		setCount(() => count + 1);
-	};
+
+	// const handleSearch = () => {
+	// 	// onSearch(search);
+	// 	setParams(() => ({ _q: search,}));
+	// 	setCount(() => count + 1);
+	// };
 
 	const handleGetDetailById = (itemSlug) => {
-		fetchProductById(itemSlug);
-		// console.log('handleGetDetailById itemSlug', itemSlug);
-		nav(`/products/${itemSlug}`);
+		if (itemSlug) {
+			// console.log('handleGetDetailById itemSlug', itemSlug);
+			nav(`/products/${itemSlug}`);
+		}
 	}
 
 	return (
@@ -223,14 +227,14 @@ function CategoriesPage() {
 									updateParams({ q: value, _page: 1 })
 								}
 							/> */}
-							<input
+							{/* <input
 								type="text"
 								value={search}
 								onChange={e => setSearch(e.target.value)}
 								placeholder="Tìm kiếm sản phẩm..."
 								className="search-bar-component"
 							/>
-							<button onClick={handleSearch}>Tìm kiếm</button>
+							<button onClick={handleSearch}>Tìm kiếm</button> */}
 						</div>
 						{/* Sort Bar */}
 						<div className="flex flex-wrap justify-between items-center mb-4">
@@ -279,40 +283,19 @@ function CategoriesPage() {
 
 						{/* Product Grid */}
 						<div className="grid gap-4 product-list">
-							{loading ? (
-								<AtomLoading />
-							) : (
-								products &&
-								products.map((item, index) => (
-									<div
-										key={item?.id ?? index}
-										className="product-card-item border rounded-lg shadow-sm p-2"
-									>
-										<div className="relative aspect-w-1 aspect-h-1">
-											<img
-												src={(item?.featured_image) ?? "https://via.placeholder.com/200x200"}
-												alt="Product Name"
-												className="object-cover w-full h-full rounded product-card-item-img"
-												onClick={() => handleGetDetailById(item?.id)}
-											/>
-										</div>
-										<div className="mt-2 text-sm font-semibold product-card-item-name"
-											onClick={() => handleGetDetailById(item?.id)}
-										>
-											{item?.title}
-										</div>
-										<div className="text-red-500 font-bold text-lg mt-1">
-											{Number(item?.price) === 0
-												? 'Liên hệ'
-												: item?.price && formatPrice( item?.price, 'VND' )}
-										</div>
-										<button className="mt-2 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-1 rounded flex items-center justify-center space-x-1">
-											<i className="bi bi-cart" />
-											<span>Thêm vào giỏ</span>
-										</button>
-									</div>
-								))
-							)}
+						{loading ? (
+							<AtomLoading />
+						) : Array.isArray(products) && products.length > 0 ? (
+							products.map((item, index) => (
+							<MoleculeProductCard
+								key={item?.id ?? index}
+								item={item}
+								handleGetDetailById={handleGetDetailById}
+							/>
+							))
+						) : (
+							<p>Không có sản phẩm nào.</p>
+						)}
 						</div>
 						{/* Pagination */}
 						<div className="pagination-component">

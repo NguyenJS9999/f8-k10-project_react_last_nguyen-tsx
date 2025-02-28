@@ -137,7 +137,7 @@ function SubHeader() {
                     >
                         {/* Danh mục chính */}
                         <div
-                            className={`px-4 py-2 cursor-pointer rounded home-nav-item content-truncate ${
+                            className={`main-category px-4 py-2 cursor-pointer rounded home-nav-item content-truncate ${
                                 activeTab === index
                                     ? 'home-nav-item--active text-white'
                                     : 'bg-white hover:bg-gray-200'

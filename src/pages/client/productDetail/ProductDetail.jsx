@@ -3,7 +3,7 @@ import './ProductForm.scss';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../../features/products/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import AtomLoading from '../../../compoents/atoms/AtomLoading/atomLoading';
+import AtomLoading from '../../../compoents/atoms/AtomLoading/AtomLoading';
 
 const ProductDetail = () => {
 	const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const ProductDetail = () => {
 						{new Intl.NumberFormat('vi-VN', {
 							style: 'currency',
 							currency: 'VND'
-						}).format(product?.price)}
+						}).format(product?.price_default)}
 					</p>
 
 					{/* Chọn số lượng */}

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
 	--black: #000;
 	--white: #fff;
@@ -14,6 +13,16 @@
 	--color-attr: #333;
 	--color-old-price: #707070;
 	--rate-color: #f59e0b;
+	--spacing: 1rem;
+	--input-color: #0a0a0a;
+	--input-border-color: grey;
+
+	--container-padding-x: 50px;
+	--container-width-small: 850px;
+	--container-width-medium: 1280px;
+	--container-width-large: 1640px;
+	/* DB accustic */
+	/* --bg-primary: rgba(22, 22, 22, 1); */
 }
 #root {
 	min-height: 101vh;
@@ -56,6 +65,7 @@ li {
 } */
 
 .pages-layout {
+	background-color: var(--background-homepage);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -63,8 +73,9 @@ li {
 }
 
 .pages-layout > div:nth-child(2) {
+	/* border: 1px solid var(--border-color); */
+	background-color: var(--background-homepage);
 	border-radius: 0.5rem;
-	border: 1px solid var(--border-color);
 	flex: 1;
 	/* padding: 0.25rem 0.5rem; */
 }
@@ -81,9 +92,8 @@ li {
 	line-clamp: 2;
 }
 
-
 /* Ghi đề css thư viện */
-.row>* {
+.row > * {
 	margin: 0.5rem;
 }
 

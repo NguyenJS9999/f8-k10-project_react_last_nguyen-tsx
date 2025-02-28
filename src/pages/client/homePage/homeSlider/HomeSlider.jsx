@@ -4,11 +4,11 @@ function HomeSlider() {
 	const sliderSettings = {
 		dots: true, // Hiển thị nút điều hướng
 		infinite: true, // Vòng lặp vô hạn
-		speed: 500, // Tốc độ chuyển đổi (ms)
+		speed: 3000, // Tốc độ chuyển đổi (ms)
 		slidesToShow: 1, // Số slide hiển thị
 		slidesToScroll: 1, // Số slide cuộn mỗi lần
 		autoplay: true, // Tự động chạy slider
-		autoplaySpeed: 3000, // Tốc độ tự động chuyển đổi
+		autoplaySpeed: 5000, // Tốc độ tự động chuyển đổi
 		responsive: [
 			{
 				breakpoint: 768, // Với màn hình nhỏ hơn 768px

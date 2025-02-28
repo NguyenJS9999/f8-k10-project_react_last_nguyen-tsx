@@ -1,6 +1,6 @@
-import './OrganismsFooter.scss';
+import './organismFooter.scss';
 
-const OrganismsFooter = () => {
+const OrganismFooter = () => {
 	return (
 		<>
 			<div id='footer' className="organisms-footer ">
@@ -266,4 +266,4 @@ const OrganismsFooter = () => {
 	);
 };
 
-export default OrganismsFooter;
+export default OrganismFooter;

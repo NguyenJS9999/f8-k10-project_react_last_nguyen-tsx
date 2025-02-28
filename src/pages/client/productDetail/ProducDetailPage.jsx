@@ -1,11 +1,11 @@
-
 import { useParams } from 'react-router-dom';
 import './ProductForm.scss';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../../features/products/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import AtomLoading from '../../../compoents/atoms/AtomLoading/atomLoading';
+import AtomLoading from '../../../compoents/atoms/AtomLoading/AtomLoading';
 import { toast, ToastContainer } from 'react-toastify';
+import { Skeleton } from '@mui/material';
 // import { getOneProduct } from '../../../services/productServices';
 
 const ProducDetailPage = () => {
@@ -38,20 +38,31 @@ const ProducDetailPage = () => {
 		toast.success(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
 	};
 
-
-
 	return (
 		<div className="container mx-auto p-4">
-
-            {loading && <AtomLoading />}
+			{loading && <AtomLoading />}
 			<div className="flex flex-col md:flex-row gap-8">
 				{/* Hình ảnh sản phẩm */}
 				<div className="flex-1">
-					<img
-						src={product?.featured_image}
-						alt={product?.title}
-						className="w-full h-96 object-cover rounded shadow-md"
-					/>
+					{product ? (
+						<img
+							// style={{
+							// 	width: 210,
+							// 	height: 118
+							// }}
+							src={
+								product?.url || '/images/default-featured-image.jpg'
+							}
+							alt={product?.title}
+							className="w-full object-cover rounded shadow-md"
+						/>
+					) : (
+						<Skeleton
+							variant="rectangular"
+							width={210}
+							height={118}
+						/>
+					)}
 				</div>
 
 				{/* Thông tin sản phẩm */}

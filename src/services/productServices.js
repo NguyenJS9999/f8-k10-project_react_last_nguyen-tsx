@@ -5,7 +5,7 @@ const handleRequest = async (callback) => {
 		const res = await callback();
 		return res.data; // Trả về dữ liệu
 	} catch (error) {
-		// console.log('handleRequest error:', error);
+		console.log('handleRequest error:', error);
 		if (error.response) {
 			// console.error('Request error response:', error.response.data);
 			return error.response; // Trả về dữ liệu lỗi

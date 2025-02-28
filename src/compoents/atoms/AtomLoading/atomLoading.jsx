@@ -3,7 +3,7 @@ import './AtomLoading.scss';
 function AtomLoading() {
 	return (
 		<>
-			<div className="loader"></div>
+			<div className="atom-logo"></div>
 		</>
 	);
 }

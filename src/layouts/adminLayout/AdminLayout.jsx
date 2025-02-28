@@ -1,8 +1,8 @@
 import './LayoutAdmin.scss';
 import { Link, Outlet } from 'react-router-dom';
-import { Layout } from 'antd';
+// import { Layout } from 'antd';
 import { useEffect, useState } from 'react';
-const { Footer } = Layout;
+// const { Footer } = Layout;
 
 
 const LayoutAdmin = () => {
@@ -110,14 +110,14 @@ const LayoutAdmin = () => {
 						</div>
 					</div>
 				</div>
-
+{/*
 				<Footer
 					style={{ textAlign: 'center' }}
 					className="footer-admin"
 				>
 					TechsoundVn Design ©{new Date().getFullYear()} Created by
 					TechsoundVn UED
-				</Footer>
+				</Footer> */}
 			</div>
 		</>
 	);
