@@ -1,0 +1,30 @@
+#header-logo {
+    margin-right: 10%;
+    padding-left: 2%;
+    border: 1px solid red !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    // color: var(--black);
+    text-decoration: none;
+    user-select: none;
+
+    & span:nth-child(1) {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: -4px;
+    }
+
+    & span:nth-child(2) {
+        font-size: 1.0rem;
+        font-weight: 400;
+        margin: -4px;
+
+    }
+}

@@ -1,142 +1,108 @@
-// import React from 'react'
-import { lazy, Suspense } from 'react';
+import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "@/routers/ProtectedRoute";
+import { Role } from "@/constant/role";
 
-// import useAuth from "@/hooks/useAuth";
-import { useRoutes } from 'react-router-dom';
-import AtomLoading from '../compoents/atoms/AtomLoading/AtomLoading.jsx';
+// Layouts
+import AdminLayout from "@/layouts/adminLayout/AdminLayout";
+import StaffLayout from "@/layouts/staffLayout/StaffLayout";
+import AccountantLayout from "@/pages/accountant/salesReport/SalesReport";
+import ClientLayout from "@/layouts/clientLayout/ClientLayout";
+// Pages
+import LoginPage from "@/pages/auth/loginPage/LoginPage";
+import Dashboard from "@/pages/admin/dashboard/Dashboard";
+import ProductTable from "@/pages/admin/productTable/ProductTable";
+import OrderList from "@/pages/admin/orderList/OrderList";
 
-// import AuthPage from '../pages/auth/authPage.jsx';
-import LoginPage from '../pages/auth/LoginPage.jsx';
-import RegisterPage from '../pages/auth/RegisterPage.jsx';
-// Lazy load các thành phần
-const ClientLayout = lazy(() => import('../layouts/clientLayout/ClientLayout.jsx'));
-const AdminLayout = lazy(() => import('../layouts/adminLayout/AdminLayout.jsx'));
-const NotFoundPage = lazy(() => import('../pages/NotFoundPage.jsx'));
-// Client
-const HomePage = lazy(() => import('../pages/client/homePage/HomePage.jsx'));
-const AboutPage = lazy(() => import('../pages/client/aboutPage/AboutPage'));
-const NewsPage = lazy(() => import('../pages/client/newsPage/NewsPage'));
-const ProjectPage = lazy(() => import('../pages/client/projectPage/ProjectPage'));
-const RecruitmentPage = lazy(() => import('../pages/client/recruitmentPage/RecruitmentPage'));
-const CartPage = lazy(() => import('../pages/client/cardPage/CardPage.jsx'));
-const ProductsPage = lazy(() => import('../pages/client/categoriesPage/CategoriesPage.jsx'));
-const ProducDetailPage = lazy(() => import('../pages/client/productDetail/ProducDetailPage.jsx'));
+import StaffOrderList from "@/pages/staff/staffOrderList/StaffOrderList";
+import SupportPage from "@/pages/staff/supportPage/SupportPage";
+import InvoiceList from "@/pages/accountant/invoiceList/InvoiceList";
+import SalesReport from "@/pages/accountant/salesReport/SalesReport";
+import NotFoundPage from "@/pages/NotFoundPage";
+import CustomerOrders from "@/pages/customer/customerOrders/CustomerOrders";
+import AccountSettings from "@/pages/customer/AccountSettings/AccountSettings";
+import RegisterForm from "@/pages/auth/registerPage/RegisterPage";
+import HomePage from "@/pages/client/homePage/HomePage";
+import CartPage from "@/pages/client/cartPage/CartPage";
+import ProductForm from "@/pages/admin/productForm/ProductForm";
+import ProductAdd from "@/pages/admin/productAdd/ProductAdd";
 
-// Admin
-const ProductTable = lazy(() => import('../pages/admin/productTable/ProductTable.jsx'));
-const ProductForm = lazy(() => import('../pages/admin/productForm/ProductForm'));
+const AppRouter = () => {
+  return (
 
-// HOC: Yêu cầu quyền đăng nhập
-const RequireAuth = ({ children }) => {
-	// const { isAuthenticated } = useAuth();
-	// console.log('RequireAuth isAuthenticated: ',isAuthenticated);
-	return children;
-	// return isAuthenticated ? children : <Navigate to="/login" replace />;
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/auth/login" element={<LoginPage />} />
+        <Route path="/auth/register" element={<RegisterForm />} />
+
+        {/* Admin Routes */}
+        <Route element={<ProtectedRoute allowedRoles={[
+          Role.ADMIN,
+          Role.MANAGER
+        ]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<ProductTable />} />
+            <Route path="products/:id" element={<ProductForm />} />
+            <Route path="products/add" element={<ProductAdd />} />
+
+            <Route path="orders" element={<OrderList />} /> {/* Có thể đặt hàng ? */}
+          </Route>
+        </Route>
+
+
+        {/* Staff Routes */}
+        <Route element={<ProtectedRoute allowedRoles={[
+          Role.ADMIN,
+          Role.MANAGER,
+          Role.STAFF,
+        ]} />}>
+          <Route path="/staff" element={<StaffLayout />}>
+            <Route index element={<StaffOrderList />} />
+            <Route path="support" element={<SupportPage />} />
+          </Route>
+        </Route>
+
+        {/* Accountant Routes */}
+        <Route element={<ProtectedRoute allowedRoles={[
+          Role.ADMIN,
+          Role.MANAGER,
+          Role.ACCOUNTANT,
+        ]} />}>
+          <Route path="/accountant" element={<AccountantLayout />}>
+            <Route index element={<InvoiceList />} />
+            <Route path="sales-report" element={<SalesReport />} />
+          </Route>
+        </Route>
+
+        {/* Customer = client Routes */}
+        <Route element={<ProtectedRoute allowedRoles={[
+          Role.ADMIN,
+          Role.MANAGER,
+          Role.STAFF,
+          Role.ACCOUNTANT,
+          Role.CUSTOMER,
+          Role.GUEST,
+        ]} />}>
+          <Route path="/user/account" element={<ClientLayout />}>
+            <Route index path="profile" element={<AccountSettings />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="purchase" element={<CustomerOrders />} />
+            {/* <Route path="purchase/order/:id" element={<CustomerOrderDetail />} ></Route> */}
+          </Route>
+        </Route>
+
+        {/* Guest Routes */}
+        <Route path="/" element={<ClientLayout />}>
+          <Route index element={<HomePage />} />
+          {/* <Route path="products" element={<ProductTable />} /> */}
+
+          {/* <Route path="/notifications/order" element={<CartPage />} /> */}
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+
+      </Routes>
+  );
 };
 
-// HOC: Kiểm tra quyền admin
-const RequireAdmin = ({ children }) => {
-	// const { user } = useAuth();
-	// console.log('RequireAdmin user: ',user);
-	return children;
-	// return user?.role === "admin" ? children : <Navigate to="/" replace />;
-};
-const AppRouters = () => {
-	const routes = [
-		{
-			path: '/',
-			element: (
-				<Suspense fallback={<AtomLoading />}>
-					<ClientLayout />
-				</Suspense>
-			),
-			children: [
-				{ path: '/', element: <HomePage /> },
-				{ path: '/cart', element: <CartPage /> },
-				{ path: '/about', element: <AboutPage /> },
-				{ path: '/news', element: <NewsPage /> },
-				{ path: '/project', element: <ProjectPage /> },
-				{ path: '/recruitment', element: <RecruitmentPage /> },
-
-				{ path: '/collections/:slug', element: <ProductsPage /> },
-				{ path: '/products/:id', element: <ProducDetailPage /> },
-			]
-		},
-		// Auth
-		// {
-		// 	path: '/auth',
-		// 	element: (
-		// 		<Suspense fallback={<AtomLoading />}>
-		// 			<AuthPage />
-		// 		</Suspense>
-		// 	)
-		// },
-		{
-			path: 'auth/register',
-			element: (
-				<Suspense fallback={<AtomLoading />}>
-					<RegisterPage />
-				</Suspense>
-			)
-		},
-		{
-			path: 'auth/login',
-			element: (
-				<Suspense fallback={<AtomLoading />}>
-					<LoginPage />
-				</Suspense>
-			)
-		},
-		// ADMIN
-		{
-			path: '/admin',
-			element: (
-				<RequireAuth>
-					<RequireAdmin>
-						<Suspense fallback={<AtomLoading />}>
-							<AdminLayout />
-						</Suspense>
-					</RequireAdmin>
-				</RequireAuth>
-			),
-			children: [
-				{
-					path: 'products',
-					element: (
-						<Suspense fallback={<AtomLoading />}>
-							<ProductTable />
-						</Suspense>
-					)
-				},
-				{
-					path: 'product/add',
-					element: (
-						<Suspense fallback={<AtomLoading />}>
-							<ProductForm />
-						</Suspense>
-					)
-				},
-				{
-					path: 'product/update/:id',
-					element: (
-						<Suspense fallback={<AtomLoading />}>
-							<ProductForm />
-						</Suspense>
-					)
-				}
-			]
-		},
-		// Other
-		{
-			path: '*',
-			element: (
-				<Suspense fallback={<AtomLoading />}>
-					<NotFoundPage />
-				</Suspense>
-			)
-		}
-	];
-	return <div className="pages-layout ">{useRoutes(routes)}</div>;
-};
-
-export default AppRouters;
+export default AppRouter;

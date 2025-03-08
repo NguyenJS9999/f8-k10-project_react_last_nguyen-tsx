@@ -1,5 +1,3 @@
-// import './ProjectPage.scss';
-// import React from 'react'
 
 function ProjectPage() {
   return (

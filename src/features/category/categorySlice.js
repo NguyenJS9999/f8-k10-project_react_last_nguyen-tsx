@@ -1,110 +1,72 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts, createProduct, editProduct, removeProduct, fetchProductById } from "./productActions";
+import { fetchCategories, createCategory, editCategory, removeCategory } from "./categoryActions";
 
 const initialState = {
-	products: [],
-	totalProducts: null,
-	product: {},
+	categories: [],
 	loading: false,
 	error: null,
-	statusCode: null,
-	message: '',
-	querrySearch: '',
 };
 
-const productSlice = createSlice({
-	name: "products",
+const categorySlice = createSlice({
+	name: "categories",
 	initialState,
-	reducers: {
-
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			// Get all products
-			.addCase(fetchProducts.pending, (state) => {
+			// Add
+			.addCase(fetchCategories.pending, (state) => {
 				state.loading = true;
 			})
-			.addCase(fetchProducts.fulfilled, (state, action) => {
+			.addCase(fetchCategories.fulfilled, (state, action) => {
 				state.loading = false;
-				// console.log("fetchProducts.fulfilled action.payload: ", action.payload);
-				state.products = action.payload;
-				state.totalProducts = action.payload.length;
-				state.statusCode = action.payload.status || 200;
-				state.message = action.payload.statusText || action.payload.message || "Success";
+				state.categories = action.payload;
 			})
-			.addCase(fetchProducts.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.error.message;
-				state.statusCode = action.payload.status || null; // chưa rõ lắm
-				state.message = action.payload.statusText || action.payload.message || "Failed";
-
-			})
-			// Get product by id
-			.addCase(fetchProductById.pending, (state) => {
-				state.loading = true;
-			})
-			.addCase(fetchProductById.fulfilled, (state, action) => {
-				state.loading = false;
-				console.log("fetchProductById.fulfilled action.payload: ", action.payload);
-				state.product = action.payload;
-			})
-			.addCase(fetchProductById.rejected, (state, action) => {
+			.addCase(fetchCategories.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 			})
-
-			// Create product
-			.addCase(createProduct.pending, (state) => {
+			// Create
+			.addCase(createCategory.pending, (state) => {
 				state.loading = true;
 			})
-			.addCase(createProduct.fulfilled, (state, action) => {
+			.addCase(createCategory.fulfilled, (state, action) => {
 				state.loading = false;
-				state.products.push(action.payload);
+				state.categories.push(action.payload);
 			})
-			.addCase(createProduct.rejected, (state, action) => {
+			.addCase(createCategory.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 			})
-
-			// Edit product
-			.addCase(editProduct.pending, (state) => {
+			// Update
+			.addCase(editCategory.pending, (state) => {
 				state.loading = true;
 			})
-			.addCase(editProduct.fulfilled, (state, action) => {
+			.addCase(editCategory.fulfilled, (state, action) => {
 				state.loading = false;
-				console.log("editProduct.fulfilled action.payload.id: ", action.payload.id);
-
-				const index = state.products.findIndex((product) => product.id === action.payload.id);
-				const product = state.products.find((product) => String(product.id) === String(action.payload.id));
-				console.log("editProduct.fulfilled index: ", index);
-				console.log("editProduct.fulfilled product: ", product);
-
+				const index = state.categories.findIndex((category) => category.id === action.payload.id);
 				if (index !== -1) {
-					state.products[index] = action.payload;
+					state.categories[index] = action.payload;
 				}
 			})
-			.addCase(editProduct.rejected, (state, action) => {
+			.addCase(editCategory.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 			})
-
-			// Remove product
-			.addCase(removeProduct.pending, (state) => {
+			// Delete
+			.addCase(removeCategory.pending, (state) => {
 				state.loading = true;
 			})
-			.addCase(removeProduct.fulfilled, (state, action) => {
+			.addCase(removeCategory.fulfilled, (state, action) => {
 				state.loading = false;
-				state.products = state.products.filter((product) => product.id !== action.payload);
+				state.categories = state.categories.filter((category) => category.id !== action.payload);
 			})
-			.addCase(removeProduct.rejected, (state, action) => {
+			.addCase(removeCategory.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 			});
-
-
 	},
 });
 
-const productReducer = productSlice.reducer;
+const categoryReducer = categorySlice.reducer;
 
-export default productReducer;
+export default categoryReducer;

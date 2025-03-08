@@ -1,13 +1,13 @@
-import './LayoutAdmin.scss';
+import './AdminLayout.scss';
 import { Link, Outlet } from 'react-router-dom';
 // import { Layout } from 'antd';
 import { useEffect, useState } from 'react';
 // const { Footer } = Layout;
 
 
-const LayoutAdmin = () => {
+const AdminLayout = () => {
 
-	const [auth] = useState(false); // setAuth
+	const [auth, setAuth ] = useState(false); // setAuth
 
 	useEffect(() => {
 		if (!auth) {
@@ -99,7 +99,7 @@ const LayoutAdmin = () => {
 								</Link>
 							</div>
 							<div className="nav-item">
-								<Link className="nav-link" to="product/add">
+								<Link className="nav-link" to="products/add">
 									Add product
 								</Link>
 							</div>
@@ -123,4 +123,4 @@ const LayoutAdmin = () => {
 	);
 };
 
-export default LayoutAdmin;
+export default AdminLayout;

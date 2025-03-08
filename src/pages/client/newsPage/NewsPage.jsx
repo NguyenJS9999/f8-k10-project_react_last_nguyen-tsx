@@ -1,5 +1,3 @@
-// import './NewsPage.scss';
-// import React from 'react'
 
 function NewsPage() {
   return (

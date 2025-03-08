@@ -5,9 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schemaProduct } from '../../../schemas/productShemas';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, editProduct, fetchProductById } from '../../../features/products/productActions';
+// import { createProduct, editProduct, fetchProductById } from '../../../features/products/productActions';
 import { ToastContainer, toast } from 'react-toastify';
-import AtomLoading from '../../../compoents/atoms/AtomLoading/AtomLoading';
+import ComponentLoading from '@/components/componentLoading/ComponentLoading';
 
 const ProductForm = () => {
     const { id } = useParams();
@@ -132,32 +132,11 @@ const ProductForm = () => {
         <div className='product-form-page'>
             <h1>{id ? 'Cập nhật' : 'Thêm mới'} sản phẩm</h1>
 
-            {loading && <AtomLoading />}
+            {loading && <ComponentLoading />}
 
             <form onSubmit={handleSubmit(handleProductForm)} className='product-form'>
                 {/* 0 Image */}
-                <div className="image-upload-container">
-                    <div
-                        className="drop-zone"
-                        onDrop={handleDrop}
-                        onDragOver={handleDragOver}
-                    >
-                        {image ? (
-                        <div className="image-preview">
-                            <img src={image} alt="Uploaded" />
-                            <button className="remove-btn" onClick={removeImage}>
-                            Xóa ảnh
-                            </button>
-                        </div>
-                        ) : (
-                        <>
-                            <p>Kéo & Thả ảnh vào đây hoặc</p>
-                            <input type="file" accept="image/*" onChange={handleFileInput} />
-                        </>
-                        )}
-                    </div>
-                    {errorImage && <p className="error-text">{errorImage}</p>}
-                </div>
+               
                 {/* 1 Title */}
                 <div className='form-group mt-2'>
                     <label htmlFor='title' className='form-label'>

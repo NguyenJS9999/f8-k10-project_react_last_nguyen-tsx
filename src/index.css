@@ -1,37 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-	--black: #000;
-	--white: #fff;
-	--primary-red: #ad1023;
-	--secondary-red: #d70018;
-	/* --secondary-red: #AD1023; */
-	--border-color: #ededed;
-	--background-homepage: #f7f8fa;
-	--color-attr: #333;
-	--color-old-price: #707070;
-	--rate-color: #f59e0b;
-	--spacing: 1rem;
-	--input-color: #0a0a0a;
-	--input-border-color: grey;
-
-	--container-padding-x: 50px;
-	--container-width-small: 850px;
-	--container-width-medium: 1280px;
-	--container-width-large: 1640px;
-	/* DB accustic */
-	/* --bg-primary: rgba(22, 22, 22, 1); */
-}
-#root {
-	min-height: 101vh;
-	/* border: 1px solid red; */
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
 * {
 	box-sizing: border-box;
 }
@@ -54,16 +20,6 @@ li {
 	list-style-type: none;
 }
 
-/* form {
-	width: 400px;
-	max-width: 100%;
-	margin: 100px auto;
-	border: 1px solid #ccc;
-	border-radius: 12px;
-	box-shadow: 0 0 12px 12px rgba(0, 0, 0, 0.2);
-	padding: 40px;
-} */
-
 .pages-layout {
 	background-color: var(--background-homepage);
 	display: flex;
@@ -74,7 +30,7 @@ li {
 
 .pages-layout > div:nth-child(2) {
 	/* border: 1px solid var(--border-color); */
-	background-color: var(--background-homepage);
+	/* background-color: var(--background-homepage); */
 	border-radius: 0.5rem;
 	flex: 1;
 	/* padding: 0.25rem 0.5rem; */
@@ -93,10 +49,52 @@ li {
 }
 
 /* Ghi đề css thư viện */
-.row > * {
+/* .row > * {
 	margin: 0.5rem;
-}
+} */
 
 .container {
 	padding: 0;
+}
+.text-danger {
+    color: red !important;
+}
+
+:root {
+    --bg-primary: #12A14A;
+    --color-page: #0077B6;
+    --color-primary: #12A14A;
+    --color-paginate: #0077B6;
+    --font-primary: "Nunito", sans-serif;
+    --content-width: 1296px;
+    --color-bortop: #ebebeb;
+    --color-sale: #F6F6F6;
+    --color-border: gray;
+    --color-main: rgb(255 168 0 / var(--tw-text-opacity));
+    --color-white: #fff;
+
+    --tw-text-opacity: 1;
+    --main-color-text: rgb(255 255 255 / var(--tw-text-opacity));
+
+	--gap: 30px;
+    --gap-double: 60px;
+    --theme-color: #12A14A;
+    --theme: #12A14A;
+    --theme-opc80-color: rgba(18, 161, 74, 0.8);
+    --theme2: #101010;
+    --theme2-color: #101010;
+    --theme2-opc80-color: rgba(16, 16, 16, 0.8);
+    --header-top-bg: transparent;
+    --header-bg: transparent;
+    --menu-bg: transparent;
+    --valak-bg: #12A14A;
+    --menu-link-hover-color: #F26921;
+    --menu-item-hover-bg: transparent;
+    --footer-bg: #F2F2F2;
+    --copyright-bg: transparent;
+    --title-font: "Inter", sans-serif;
+    --text-font: "Inter", sans-serif;
+    --menu-font: "Inter", sans-serif;
+    --dropdown-bg: #F2F2F2;
+
 }

@@ -37,3 +37,5 @@ export const schemaProduct = z.object({
 		)
 		.optional()
 });
+// valueAsNumber Không Hợp Lệ với z.number() nếu price_default rỗng, nó sẽ gửi NaN, làm validation thất bại
+//  cần thêm nếu có biến thể thì price_default ko bắt buộc
