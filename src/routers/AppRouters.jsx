@@ -25,6 +25,7 @@ import HomePage from "@/pages/client/homePage/HomePage";
 import CartPage from "@/pages/client/cartPage/CartPage";
 import ProductForm from "@/pages/admin/productForm/ProductForm";
 import ProductAdd from "@/pages/admin/productAdd/ProductAdd";
+import RecruitmentPage from "@/pages/client/recruitmentPage/RecruitmentPage";
 
 const AppRouter = () => {
   return (
@@ -87,6 +88,7 @@ const AppRouter = () => {
             <Route index path="profile" element={<AccountSettings />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="purchase" element={<CustomerOrders />} />
+
             {/* <Route path="purchase/order/:id" element={<CustomerOrderDetail />} ></Route> */}
           </Route>
         </Route>
@@ -95,6 +97,7 @@ const AppRouter = () => {
         <Route path="/" element={<ClientLayout />}>
           <Route index element={<HomePage />} />
           {/* <Route path="products" element={<ProductTable />} /> */}
+          <Route path="recruitment" element={<RecruitmentPage />} />
 
           {/* <Route path="/notifications/order" element={<CartPage />} /> */}
         </Route>

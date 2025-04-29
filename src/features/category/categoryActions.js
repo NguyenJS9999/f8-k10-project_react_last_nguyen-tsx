@@ -9,6 +9,14 @@ export const fetchCategories = createAsyncThunk(
 	}
 );
 
+export const fetchCategory = createAsyncThunk(
+	'categorys/fetchCategory',
+	async () => {
+		return await getCategoryById();
+	}
+);
+
+
 export const createCategory = createAsyncThunk(
 	'categorys/createCategory',
 	async category => {

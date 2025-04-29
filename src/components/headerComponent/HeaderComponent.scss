@@ -162,26 +162,24 @@
     // display: flex;
 }
 .menu-dropdown__content {
-    border: 1px solid blue;
+    // border: 1px solid blue;
     padding: 2rem 0;
     height: 100%;
     flex: 1;
     position: absolute;
 
 }
-.menu-dropdown__content__item {
-    border: 1px solid red;
-
-}
+// .menu-dropdown__content__item {
+//     border: 1px solid red;
+// }
 .menu-dropdown__content__item__title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--black);
 }
-.menu-dropdown__content__item__content {
-    border: 1px solid red;
-
-}
+// .menu-dropdown__content__item__content {
+//     border: 1px solid red;
+// }
 .menu-dropdown__content__item__content__item {
     color: var(--color-white);
 

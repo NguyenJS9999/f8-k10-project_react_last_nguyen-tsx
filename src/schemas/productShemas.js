@@ -21,8 +21,13 @@ export const schemaProduct = z.object({
 	title: z.string().min(3, 'Tiêu đề phải có ít nhất 3 ký tự'),
 	price_default: z.number().positive('Giá sản phẩm phải là số dương'),
 	categoryId: z.string().min(1, 'Vui lòng chọn danh mục'),
+	
+	brandId: z.string().min(1, 'Vui lòng chọn thương hiệu'),
 	description: z.string().optional(),
-	image_url: z.string().url('URL ảnh không hợp lệ').optional(),
+	image_url: z
+	.string()
+	// .url('URL ảnh không hợp lệ')
+	.optional(),
 	stock_default: z.number().int().positive('Số lượng tồn kho phải lớn hơn 0'),
 	rate: z.number().min(0).max(5).default(0).optional(),
 	isHidden: z.boolean().default(false),

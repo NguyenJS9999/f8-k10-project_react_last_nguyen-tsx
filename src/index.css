@@ -49,9 +49,9 @@ li {
 }
 
 /* Ghi đề css thư viện */
-/* .row > * {
-	margin: 0.5rem;
-} */
+.row {
+	margin: 0rem;
+}
 
 .container {
 	padding: 0;
